@@ -17,13 +17,11 @@ nnoremap <leader>q :q<CR>
 nnoremap <C-p> :Files<CR>
 inoremap jk <esc>
 
-let g:native_sidebar_shortcut = '<c-b>'
-
 " Plugins 
 call plug#begin()
 
-" side bar
-Plug 'pablopunk/native-sidebar.vim'
+" side bar 
+Plug 'preservim/nerdtree'
 
 " Theme to look amazing
 Plug 'ayu-theme/ayu-vim' 
