@@ -1,0 +1,10 @@
+[terminal]
+font_size = 14
+cursor_shape = "block"
+
+[theme]
+background = "#1e1e1e"
+foreground = "#d4d4d4"
+cursor_fg = "#ffffff"
+cursor_bg = "#007acc"
+
