@@ -27,17 +27,30 @@ require("lazy").setup({
   { "pangloss/vim-javascript" },
   { "leafgarland/typescript-vim" },
 
-  -- Autocomplete
-  { "neoclide/coc.nvim", branch = "release" },
-
   -- Status line
   { "vim-airline/vim-airline" },
 
   -- Comments
   { "preservim/nerdcommenter" },
+
+  -- LSP support
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("config.lsp")
+    end,
+  },
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+
+  -- Completion engine
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
 })
 
 -- Theme setup
 vim.g.ayucolor = "dark"
-vim.cmd("colorscheme ayu")
+vim.cmd("colorscheme desert")
 

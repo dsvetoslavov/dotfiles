@@ -144,5 +144,4 @@ if [ -f '/Users/desv/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/desv
 #unset __conda_setup
 # <<< conda initialize <<<
 
-alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport"
-eval "$(fnm env)"
+export PATH="$HOME/go/bin:$PATH"
