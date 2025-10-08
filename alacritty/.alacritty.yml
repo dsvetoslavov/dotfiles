@@ -1,0 +1,71 @@
+# Alacritty quick setup: Vim mode + Darcula-ish theme + transparency
+
+live_config_reload: true
+
+window:
+  # 0.0 = fully transparent, 1.0 = opaque
+  opacity: 0.88
+  # Optional (macOS/KDE): blurred translucency behind the window
+  blur: true
+  padding: { x: 8, y: 8 }
+
+font:
+  normal:   { family: "JetBrains Mono", style: Regular }
+  bold:     { family: "JetBrains Mono", style: Bold }
+  italic:   { family: "JetBrains Mono", style: Italic }
+  size: 13.0
+
+cursor:
+  style:
+    shape: Block
+    blinking: On
+  # Different cursor when in Vi mode (so it's obvious)
+  vi_mode_style:
+    shape: Beam
+    blinking: Off
+
+selection:
+  save_to_clipboard: true
+
+# JetBrains WebStorm (Darcula-like) terminal colors
+colors:
+  primary:
+    background: "0x2b2b2b"
+    foreground: "0xa9b7c6"
+  cursor:
+    text:       "0x2b2b2b"
+    cursor:     "0xa9b7c6"
+  selection:
+    text:       "0xffffff"
+    background: "0x35598e"  # subdued blue like JetBrains selection
+
+  normal:
+    black:   "0x3c3f41"
+    red:     "0xd25252"
+    green:   "0x6a8759"
+    yellow:  "0xbbb529"
+    blue:    "0x6897bb"
+    magenta: "0x9876aa"
+    cyan:    "0x629755"
+    white:   "0xa9b7c6"
+
+  bright:
+    black:   "0x555555"
+    red:     "0xff6b68"
+    green:   "0x83d17d"
+    yellow:  "0xffd479"
+    blue:    "0x79a8ff"
+    magenta: "0xc77dbb"
+    cyan:    "0x89ddff"
+    white:   "0xffffff"
+
+# --- Vi mode (Vim-like) ---
+# Toggle Vi mode with Ctrl+Shift+Space. Copy with 'y' in Vi mode, etc.
+key_bindings:
+  - { key: Space, mods: Control|Shift, action: ToggleViMode }
+  # Common Vi-mode helpers
+  - { key: Y,     mode: Vi, action: Copy }                 # yank selection
+  - { key: V,     mode: Vi, action: ToggleLineSelection }  # line select
+  - { key: Key0,  mods: Control, mode: Vi, action: ClearSelection }
+  - { key: Escape, mode: Vi, action: ClearSelection }
+
