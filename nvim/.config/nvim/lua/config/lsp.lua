@@ -3,7 +3,7 @@
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-lspconfig.gopls.setup({
+vim.lsp.config("gopls", {  
   capabilities = capabilities,
   on_attach = function(_, bufnr)
     local opts = { buffer = bufnr }
@@ -20,4 +20,4 @@ lspconfig.gopls.setup({
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
   end,
 })
-
+vim.lsp.enable({ "gopls" })
