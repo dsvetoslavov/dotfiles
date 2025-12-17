@@ -14,7 +14,22 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Theme
-  { "ayu-theme/ayu-vim" },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      require("gruvbox").setup({
+        contrast = "hard", -- can be "hard", "soft" or empty string
+        transparent_mode = false,
+        italic = {
+          strings = false,
+          comments = true,
+          operators = false,
+          folds = true,
+        },
+      })
+    end,
+  },
 
   -- File tree
   { "preservim/nerdtree" },
@@ -41,7 +56,13 @@ require("lazy").setup({
       require("config.lsp")
     end,
   },
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+    }
+  },
 
   -- Completion engine
   { "hrsh7th/nvim-cmp" },
@@ -112,6 +133,5 @@ require("lazy").setup({
 })
 
 -- Theme setup
-vim.g.ayucolor = "dark"
-vim.cmd("colorscheme desert")
+vim.cmd("colorscheme gruvbox")
 
