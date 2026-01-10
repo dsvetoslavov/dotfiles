@@ -13,4 +13,5 @@ map("n", "<C-p>", ":Files<CR>", opts)
 map("i", "jk", "<esc>", opts)
 
 vim.keymap.set("n", "<leader>gf", ":!gofmt -w %<CR>:e<CR>", { desc = "Run gofmt" })
+vim.keymap.set("n", "<leader>pf", ":!black %<CR>:e<CR>", { desc = "Run black formatter" })
 
