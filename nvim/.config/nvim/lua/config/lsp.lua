@@ -18,6 +18,9 @@ vim.lsp.config("gopls", {
 
     -- Optional: hover docs
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+    -- Code actions
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
   end,
 })
 
