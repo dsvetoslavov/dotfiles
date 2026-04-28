@@ -50,4 +50,8 @@ vim.lsp.config("pyright", {
   }
 })
 
-vim.lsp.enable({ "gopls", "pyright" })
+vim.lsp.config("html", {
+  capabilities = capabilities,
+})
+
+vim.lsp.enable({ "gopls", "pyright", "html" })
