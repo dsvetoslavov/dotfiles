@@ -1,0 +1,96 @@
+
+[window]
+opacity = 0.88
+blur = true
+decorations = "None"
+
+[window.padding]
+x = 8
+y = 8
+
+[font]
+size = 13.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
+
+[cursor.vi_mode_style]
+shape = "Beam"
+blinking = "Off"
+
+[selection]
+save_to_clipboard = true
+
+[colors.primary]
+background = "0x2b2b2b"
+foreground = "0xa9b7c6"
+
+[colors.cursor]
+text = "0x2b2b2b"
+cursor = "0xa9b7c6"
+
+[colors.selection]
+text = "0xffffff"
+background = "0x35598e"
+
+[colors.normal]
+black   = "0x3c3f41"
+red     = "0xd25252"
+green   = "0x6a8759"
+yellow  = "0xbbb529"
+blue    = "0x6897bb"
+magenta = "0x9876aa"
+cyan    = "0x629755"
+white   = "0xa9b7c6"
+
+[colors.bright]
+black   = "0x555555"
+red     = "0xff6b68"
+green   = "0x83d17d"
+yellow  = "0xffd479"
+blue    = "0x79a8ff"
+magenta = "0xc77dbb"
+cyan    = "0x89ddff"
+white   = "0xffffff"
+
+[[keyboard.bindings]]
+key = "Space"
+mods = "Control|Shift"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "Y"
+mode = "Vi"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "V"
+mode = "Vi"
+action = "ToggleLineSelection"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Control"
+mode = "Vi"
+action = "ClearSelection"
+
+[[keyboard.bindings]]
+key = "Escape"
+mode = "Vi"
+action = "ClearSelection"
+
+[general]
+live_config_reload = true
