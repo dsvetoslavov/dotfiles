@@ -117,12 +117,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/desv/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/desv/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/desv/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/desv/google-cloud-sdk/completion.zsh.inc'; fi
-
 # export PATH="/opt/miniconda3/bin:$PATH"  # commented out by conda initialize
 
 # >>> conda initialize >>>
@@ -147,3 +141,36 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export ANDROID_HOME=$HOME/Library/Android/sdk && export PATH=$PATH:$ANDROID_HOME/emulator && export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+
+
+
+
+# superfile cd on quit
+spf() {
+    os=$(uname -s)
+    # macOS
+    if [[ "$os" == "Darwin" ]]; then
+        export SPF_LAST_DIR="$HOME/Library/Application Support/superfile/lastdir"
+    fi
+
+    command spf "$@"
+
+    [ ! -f "$SPF_LAST_DIR" ] || {
+        . "$SPF_LAST_DIR"
+        rm -f -- "$SPF_LAST_DIR" > /dev/null
+    }
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/desv/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/desv/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/desv/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/desv/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/Users/desv/.bun/_bun" ] && source "/Users/desv/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
