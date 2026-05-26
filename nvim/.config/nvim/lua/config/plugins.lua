@@ -15,17 +15,22 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- Theme
   {
-    "ellisonleao/gruvbox.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      require("gruvbox").setup({
-        contrast = "hard", -- can be "hard", "soft" or empty string
-        transparent_mode = false,
-        italic = {
-          strings = false,
-          comments = true,
-          operators = false,
-          folds = true,
+      require("catppuccin").setup({
+        flavour = "frappe",
+        transparent_background = false,
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
+        },
+        integrations = {
+          cmp = true,
+          treesitter = true,
+          telescope = { enabled = true },
+          neotest = false,
         },
       })
     end,
@@ -133,5 +138,5 @@ require("lazy").setup({
 })
 
 -- Theme setup
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme catppuccin")
 
