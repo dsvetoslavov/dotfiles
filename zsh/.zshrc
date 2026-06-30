@@ -386,3 +386,11 @@ _bootdev()
 if [ "$funcstack[1]" = "_bootdev" ]; then
     _bootdev
 fi
+
+
+alias ld="lazydocker"
+
+fpath=(~/.zsh/completion $fpath)
+
+# Initialize completion system
+autoload -Uz compinit && compinit
