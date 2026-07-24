@@ -106,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ld="lazydocker"
 
 [ -f ~/.zsh/.fzf.zsh ] && source ~/.zsh/.fzf.zsh
 
@@ -125,9 +126,6 @@ path=(
   $HOME/go/bin
   $path
 )
-
-
-
 
 # superfile cd on quit
 spf() {
@@ -151,7 +149,6 @@ if [ -f '/Users/desv/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/desv/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/desv/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-alias ld="lazydocker"
 
 fpath=(~/.zsh/completion $fpath)
 
