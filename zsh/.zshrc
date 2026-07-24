@@ -116,10 +116,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$HOME/go/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+# PATH additions. `typeset -U path` keeps entries unique (no dupes on re-source).
+# Order = precedence (first wins), matching the original prepend order.
+typeset -U path
+path=(
+  /opt/homebrew/opt/curl/bin
+  /opt/homebrew/opt/postgresql@15/bin
+  $HOME/go/bin
+  $path
+)
 
 
 
@@ -145,13 +150,6 @@ if [ -f '/Users/desv/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/desv/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/desv/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-# bun completions
-[ -s "/Users/desv/.bun/_bun" ] && source "/Users/desv/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 alias ld="lazydocker"
 
