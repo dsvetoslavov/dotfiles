@@ -10,13 +10,12 @@ that package's files into place, so the working config always lives in git.
 
 | Package      | Target                | Description                                                        |
 | ------------ | --------------------- | ----------------------------------------------------------------- |
-| `zsh`        | `~/.zshrc`, `~/.p10k.zsh`, `~/.zsh/` | Zsh + oh-my-zsh + Powerlevel10k, completions, fzf, nvm |
+| `zsh`        | `~/.zshrc`, `~/.p10k.zsh`, `~/.zsh/` | Zsh + oh-my-zsh + Powerlevel10k                    |
 | `nvim`       | `~/.config/nvim/`     | Neovim, lazy.nvim-managed, modular Lua config                     |
 | `tmux`       | `~/.tmux.conf`        | tmux: truecolor, mouse, vi copy-mode → `pbcopy`                   |
 | `aerospace`  | `~/.aerospace.toml`   | AeroSpace tiling window manager (i3-style keybinds)               |
 | `alacritty`  | `~/.alacritty.toml`   | Alacritty terminal (JetBrainsMono Nerd Font, blur)               |
 | `ghostty`    | `~/ghostty/ghostty.toml` | Ghostty terminal (dark theme)                                 |
-| `.vimrc`     | `~/.vimrc`            | Plain vim config (used as the SSH `EDITOR`) — **not** stow-managed |
 
 ## Prerequisites
 
@@ -57,12 +56,6 @@ cd ~/dotfiles
 stow zsh nvim tmux aerospace alacritty ghostty
 ```
 
-`.vimrc` lives at the repo root (not inside a package), so link it manually:
-
-```sh
-ln -s "$PWD/.vimrc" ~/.vimrc
-```
-
 Handy stow commands (run from the repo root):
 
 ```sh
@@ -85,10 +78,9 @@ stow -D zsh      # delete: remove the symlinks
 - **nvm:** Node version manager loaded from `~/.nvm`.
 - **PATH additions:** Homebrew `curl` & `postgresql@15`, `$HOME/go/bin`, plus the
   Google Cloud SDK.
-- **Extras:** `spf` wrapper cd's into superfile's last directory on quit;
+- **Extras:** 
   `ld` is an alias for `lazydocker`.
-- **Completions:** custom completions in `~/.zsh/completion/` (`_docker`, `_bootdev`).
-- See [`zsh/IMPROVEMENTS.md`](zsh/IMPROVEMENTS.md) for a menu of optional enhancements.
+- **Completions:** custom completions in `~/.zsh/completion/` (`_docker`).
 
 ### nvim
 Managed by [lazy.nvim](https://github.com/folke/lazy.nvim) with plugin versions
@@ -142,7 +134,3 @@ Truecolor for Alacritty, mouse enabled, 10k-line history, vi copy-mode.
   decorations.
 - **Ghostty** — JetBrainsMono, 14pt, block cursor, dark theme. Note the config is
   linked to `~/ghostty/ghostty.toml` (non-standard path from the package layout).
-
-### vim
-Plain `.vimrc` used as the fallback `EDITOR` for SSH sessions. Linked manually
-(see [Install](#install)).
