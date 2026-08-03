@@ -15,7 +15,7 @@ that package's files into place, so the working config always lives in git.
 | `tmux`       | `~/.tmux.conf`        | tmux: truecolor, mouse, vi copy-mode → `pbcopy`                   |
 | `aerospace`  | `~/.aerospace.toml`   | AeroSpace tiling window manager (i3-style keybinds)               |
 | `alacritty`  | `~/.alacritty.toml`   | Alacritty terminal (JetBrainsMono Nerd Font, blur)               |
-| `ghostty`    | `~/ghostty/ghostty.toml` | Ghostty terminal (dark theme)                                 |
+| `ghostty`    | `~/.config/ghostty/config` | Ghostty terminal (Catppuccin Frappé)                        |
 
 ## Prerequisites
 
@@ -108,7 +108,7 @@ plenary), friendly-snippets, nvim-autopairs, conform.nvim.
 Run `:Lazy` to manage plugins; commit `lazy-lock.json` to pin updates.
 
 ### tmux
-Truecolor for Alacritty, mouse enabled, 10k-line history, vi copy-mode.
+Truecolor, mouse enabled, 10k-line history, vi copy-mode.
 
 | Key                      | Action                            |
 | ------------------------ | --------------------------------- |
@@ -132,5 +132,5 @@ Truecolor for Alacritty, mouse enabled, 10k-line history, vi copy-mode.
 ### Terminals
 - **Alacritty** — JetBrainsMono Nerd Font 13pt, 0.88 opacity + blur, no window
   decorations.
-- **Ghostty** — JetBrainsMono, 14pt, block cursor, dark theme. Note the config is
-  linked to `~/ghostty/ghostty.toml` (non-standard path from the package layout).
+- **Ghostty** — JetBrainsMono Nerd Font 13pt, Catppuccin Frappé (Ghostty's
+  built-in `Catppuccin Frappe` theme), 0.88 opacity + blur, blinking block cursor. 
