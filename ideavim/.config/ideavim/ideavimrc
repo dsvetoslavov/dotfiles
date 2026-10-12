@@ -1,0 +1,87 @@
+" ~/.config/ideavim/ideavimrc
+" IdeaVim config for JetBrains IDEs. Mirrors nvim/.config/nvim so both editors
+" share the same leader, keymaps and plugin behaviour.
+
+" ---- Options (nvim: lua/config/options.lua) --------------------------------
+let mapleader = " "
+
+set number
+set relativenumber
+set hlsearch
+set incsearch
+set visualbell
+set ideajoin
+set idearefactormode=keep
+set clipboard+=ideaput
+
+" ---- Plugin emulation (nvim: lua/config/plugins.lua) ------------------------
+" Yank highlight, like the TextYankPost autocmd (300ms)
+set highlightedyank
+let g:highlightedyank_highlight_duration = "300"
+
+" nvim-surround: ys/cs/ds
+set surround
+
+" gcc / gc{motion}
+set commentary
+
+" nerdtree
+set NERDTree
+
+" vim-tmux-navigator: C-h/j/k/l between splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" ---- Mappings (nvim: lua/config/mappings.lua) -------------------------------
+inoremap jk <Esc>
+nnoremap <leader>w :w<CR>
+nmap <leader>q <Action>(CloseContent)
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
+nnoremap <leader>c "+yy
+vnoremap <leader>c "+y
+nnoremap <leader><CR> :source ~/.config/ideavim/ideavimrc<CR>
+nnoremap <leader>pv :NERDTreeFind<CR>
+
+" Diagnostics
+nmap <leader>e <Action>(ShowErrorDescription)
+nmap [d <Action>(GotoPreviousError)
+nmap ]d <Action>(GotoNextError)
+
+" Formatting (conform / gofmt / black -> IDE formatter for the language)
+nmap <leader>cf <Action>(ReformatCode)
+vmap <leader>cf <Action>(ReformatCode)
+nmap <leader>gf <Action>(ReformatCode)
+nmap <leader>pf <Action>(ReformatCode)
+
+" ---- Telescope (nvim: telescope spec keys) ----------------------------------
+nmap <C-p> <Action>(GotoFile)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>fd <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>ls <Action>(FileStructurePopup)
+
+" ---- LSP (nvim: lua/config/lsp.lua on_attach) -------------------------------
+nmap gd <Action>(GotoDeclaration)
+nmap gr <Action>(ShowUsages)
+nmap K <Action>(QuickJavaDoc)
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>ca <Action>(ShowIntentionActions)
+
+" ---- Key handlers: vim wins in normal/visual, IDE keeps insert mode ---------
+sethandler <C-h> a:vim
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+sethandler <C-l> a:vim
+sethandler <C-w> a:vim
+sethandler <C-o> a:vim
+sethandler <C-i> a:vim
+sethandler <C-p> n-v:vim i:ide
+sethandler <C-r> n-v:vim i:ide
+sethandler <C-v> n-v:vim i:ide
+sethandler <C-d> n-v:vim i:ide
+sethandler <C-u> n-v:vim i:ide
+" Completion (nvim-cmp <C-Space>) is the IDE's own lookup
+sethandler <C-Space> a:ide
