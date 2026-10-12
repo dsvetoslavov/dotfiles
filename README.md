@@ -12,7 +12,7 @@ that package's files into place, so the working config always lives in git.
 | ------------ | --------------------- | ----------------------------------------------------------------- |
 | `zsh`        | `~/.zshrc`, `~/.p10k.zsh`, `~/.zsh/` | Zsh + oh-my-zsh + Powerlevel10k                    |
 | `nvim`       | `~/.config/nvim/`     | Neovim, lazy.nvim-managed, modular Lua config                     |
-| `tmux`       | `~/.tmux.conf`        | tmux: truecolor, mouse, vi copy-mode → `pbcopy`                   |
+| `tmux`       | `~/.tmux.conf`        | tmux: truecolor, mouse, vi copy-mode → `pbcopy`, TPM + Catppuccin |
 | `aerospace`  | `~/.aerospace.toml`   | AeroSpace tiling window manager (i3-style keybinds)               |
 | `alacritty`  | `~/.alacritty.toml`   | Alacritty terminal (JetBrainsMono Nerd Font, blur)               |
 | `ghostty`    | `~/.config/ghostty/config` | Ghostty terminal (Catppuccin Frappé)                        |
@@ -41,6 +41,9 @@ brew install --cask font-jetbrains-mono-nerd-font
 # Optional apps referenced by the configs
 brew install --cask aerospace alacritty ghostty
 brew install lazydocker superfile
+
+# tmux plugin manager (TPM) — required before linking `tmux`
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 > **Install oh-my-zsh and the two custom plugins *before* linking `zsh`.** The
@@ -87,34 +90,68 @@ Managed by [lazy.nvim](https://github.com/folke/lazy.nvim) with plugin versions
 pinned in `lazy-lock.json`. Config is split under `lua/config/`: `options`,
 `mappings`, `plugins`, `lsp`, `telescope`, `completion`.
 
-**Plugins:** catppuccin (theme), nerdtree, fzf + fzf.vim, vim-javascript,
-typescript-vim, vim-airline, nerdcommenter, nvim-lspconfig, telescope (+ fzf-native,
-plenary), friendly-snippets, nvim-autopairs, conform.nvim.
+**Plugins:** catppuccin (theme), nerdtree, vim-airline, nerdcommenter,
+nvim-surround, vim-tmux-navigator, nvim-treesitter, nvim-ts-autotag, emmet-vim,
+vim-javascript, typescript-vim, nvim-lspconfig, conform.nvim, telescope
+(+ plenary, fzf-native) and nvim-cmp (+ cmp-nvim-lsp, cmp-buffer, cmp-path,
+LuaSnip, friendly-snippets, nvim-autopairs).
+
+Telescope, nvim-cmp, lspconfig, treesitter and conform are all lazy-loaded on
+keypress, command or event — `init.lua` only requires `options`, `mappings` and
+`plugins`.
 
 **Keybindings** (leader = `Space`):
 
-| Key           | Action                        |
-| ------------- | ----------------------------- |
-| `<leader>w`   | Write                         |
-| `<leader>q`   | Quit                          |
-| `<leader>pv`  | Open file explorer (`:Vex`)   |
-| `<C-p>`       | Fuzzy file finder (`:Files`)  |
-| `jk` (insert) | Escape                        |
-| `<leader>c`   | Copy to system clipboard      |
-| `<leader>gf`  | Format current file with `gofmt` |
-| `<leader>pf`  | Format current file with `black` |
-| `<leader><CR>`| Reload `init.lua`             |
+| Key            | Action                                      |
+| -------------- | ------------------------------------------- |
+| `<leader>w`    | Write                                       |
+| `<leader>q`    | Quit                                        |
+| `<leader>pv`   | Open file explorer (`:Vex`)                 |
+| `<leader>o`/`O`| Blank line below / above                    |
+| `jk` (insert)  | Escape                                      |
+| `<leader>c`    | Copy to system clipboard                    |
+| `<leader><CR>` | Reload `init.lua`                           |
+| `<C-p>`        | Find files (telescope, includes hidden)     |
+| `<leader>ff`   | Find files (telescope, includes hidden)     |
+| `<leader>fg`   | Live grep                                   |
+| `<leader>fd`   | Diagnostics list                            |
+| `<leader>ls`   | Document symbols                            |
+| `<leader>e`    | Show diagnostic under cursor (float)        |
+| `<leader>cf`   | Format buffer (conform, prettier)           |
+| `<leader>gf`   | Format current file with `gofmt`            |
+| `<leader>pf`   | Format current file with `black`            |
+| `<C-z>`        | Emmet leader (html/css/svelte)              |
+
+**LSP keybindings**, bound buffer-local on attach (`lua/config/lsp.lua`) for
+gopls, pyright, ts_ls, html, svelte and eslint:
+
+| Key           | Action            |
+| ------------- | ----------------- |
+| `gd`          | Go to definition  |
+| `gr`          | Find references   |
+| `K`           | Hover             |
+| `<leader>rn`  | Rename symbol     |
+| `<leader>ca`  | Code action       |
 
 Run `:Lazy` to manage plugins; commit `lazy-lock.json` to pin updates.
 
 ### tmux
-Truecolor, mouse enabled, 10k-line history, vi copy-mode.
+Truecolor (all terminals), mouse enabled, 50k-line history, vi copy-mode,
+1-based windows/panes. Plugins are managed by [TPM](https://github.com/tmux-plugins/tpm);
+run `prefix + I` once after linking to install them.
+
+**Plugins:** `catppuccin/tmux` (Frappé status bar, matches Ghostty),
+`vim-tmux-navigator` (seamless nvim ↔ tmux pane nav — pairs with the
+`christoomey/vim-tmux-navigator` nvim plugin).
 
 | Key                      | Action                            |
 | ------------------------ | --------------------------------- |
 | `prefix r`               | Reload `~/.tmux.conf`             |
+| `prefix I`               | Install plugins (TPM)             |
 | `prefix %`               | Split horizontally (keeps cwd)   |
 | `prefix "`               | Split vertically (keeps cwd)     |
+| `C-h/j/k/l`              | Move between tmux panes / nvim splits |
+| copy-mode `v` / `y`      | Begin selection / yank to clipboard |
 | mouse-drag / `Enter`     | Copy selection to macOS clipboard (`pbcopy`) |
 
 ### aerospace
