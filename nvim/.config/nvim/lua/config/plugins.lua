@@ -1,6 +1,6 @@
 -- ~/.config/nvim/lua/config/plugins.lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -36,12 +36,11 @@ require("lazy").setup({
     end,
   },
 
+  -- Seamless navigation between tmux panes and nvim splits (C-h/j/k/l)
+  { "christoomey/vim-tmux-navigator" },
+
   -- File tree
   { "preservim/nerdtree" },
-
-  -- Fuzzy finder
-  { "junegunn/fzf", build = ":call fzf#install()" },
-  { "junegunn/fzf.vim" },
 
   -- JavaScript/TypeScript
   { "pangloss/vim-javascript" },
@@ -63,17 +62,44 @@ require("lazy").setup({
   },
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
-    }
+    },
+    keys = {
+      {
+        "<C-p>",
+        function() require("telescope.builtin").find_files({ hidden = true }) end,
+        desc = "Find files",
+      },
+      {
+        "<leader>ff",
+        function() require("telescope.builtin").find_files({ hidden = true }) end,
+        desc = "Find files",
+      },
+      {
+        "<leader>fg",
+        function() require("telescope.builtin").live_grep() end,
+        desc = "Live grep",
+      },
+      {
+        "<leader>fd",
+        function() require("telescope.builtin").diagnostics() end,
+        desc = "Diagnostics",
+      },
+      {
+        "<leader>ls",
+        function() require("telescope.builtin").lsp_document_symbols() end,
+        desc = "LSP: Document symbols",
+      },
+    },
+    config = function()
+      require("config.telescope")
+    end,
   },
 
   -- Completion engine
-  { "hrsh7th/nvim-cmp" },
-  { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/cmp-buffer" },
-  { "hrsh7th/cmp-path" },
   {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
@@ -86,6 +112,9 @@ require("lazy").setup({
       "rafamadriz/friendly-snippets",
       "windwp/nvim-autopairs",
     },
+    config = function()
+      require("config.completion")
+    end,
   },
 
   -- Treesitter 

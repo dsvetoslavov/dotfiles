@@ -1,5 +1,8 @@
 local cmp = require("cmp")
 
+local ok_pairs_setup, autopairs = pcall(require, "nvim-autopairs")
+if ok_pairs_setup then autopairs.setup({}) end
+
 local ok_snip, luasnip = pcall(require, "luasnip")
 if ok_snip then
   require("luasnip.loaders.from_vscode").lazy_load()

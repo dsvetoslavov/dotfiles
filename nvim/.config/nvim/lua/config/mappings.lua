@@ -9,11 +9,12 @@ map("n", "<leader>O", "O<esc>", opts)
 map("n", "<leader><CR>", ":so $MYVIMRC<CR>", opts)
 map("n", "<leader>w", ":w<CR>", opts)
 map("n", "<leader>q", ":q<CR>", opts)
-map("n", "<C-p>", ":Files<CR>", opts)
 map("i", "jk", "<esc>", opts)
 map("v", "<leader>c", '"+y', { noremap = true, silent = true })
 map("n", "<leader>c", '"+yy', { noremap = true, silent = true })
 
+
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "LSP: Show diagnostic (float)" })
 
 vim.keymap.set("n", "<leader>gf", ":!gofmt -w %<CR>:e<CR>", { desc = "Run gofmt" })
 vim.keymap.set("n", "<leader>pf", ":!black %<CR>:e<CR>", { desc = "Run black formatter" })
