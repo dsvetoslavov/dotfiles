@@ -139,8 +139,11 @@ require("lazy").setup({
       vim.api.nvim_create_autocmd('FileType', {
         pattern = { '*' },
         callback = function()
-          pcall(vim.treesitter.start)
-          
+          if pcall(vim.treesitter.start) then
+            vim.wo[0][0].foldmethod = 'expr'
+            vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          end
+
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
